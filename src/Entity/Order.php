@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OrderRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,6 +25,17 @@ class Order
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
+
+    /**
+     * @var Collection<int, Products>
+     */
+    #[ORM\ManyToMany(targetEntity: Products::class, inversedBy: 'orders')]
+    private Collection $products;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -61,6 +74,30 @@ class Order
     public function setDate(\DateTimeInterface $date): static
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Products>
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Products $product): static
+    {
+        if (!$this->products->contains($product)) {
+            $this->products->add($product);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Products $product): static
+    {
+        $this->products->removeElement($product);
 
         return $this;
     }
