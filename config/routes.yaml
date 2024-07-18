@@ -4,6 +4,6 @@ controllers:
         namespace: App\Controller
     type: attribute
 
-hello:
+home.page:
     path: /
     controller: App\Controller\HomeController::homepage    
