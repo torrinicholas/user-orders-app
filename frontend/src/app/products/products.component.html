@@ -8,12 +8,14 @@
     </tr>
   </thead>
   <tbody>
-    @for (item of products; track item.id;) {
+    @for (product of products; track product.id;) {
       <tr>
-        <th scope="row">{{ item.id }}</th>
-        <td>{{ item.name }}</td>
-        <td>{{ item.price }}</td>
+        <th scope="row">{{ product.id }}</th>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }}</td>
       </tr>
     }
   </tbody>
 </table>
+
+<app-product-form></app-product-form>

@@ -5,11 +5,13 @@ import {
   DomRendererFactory2,
   EVENT_MANAGER_PLUGINS,
   EventManagerPlugin
-} from "./chunk-NWUWTLIS.js";
+} from "./chunk-FRYFTMMY.js";
+import {
+  HTTP_ROOT_INTERCEPTOR_FNS,
+  HttpClientModule
+} from "./chunk-QQHU6SQT.js";
 import {
   DOCUMENT,
-  HTTP_ROOT_INTERCEPTOR_FNS,
-  HttpClientModule,
   NullViewportScroller,
   PLATFORM_SERVER_ID,
   PlatformLocation,
@@ -17,7 +19,7 @@ import {
   XhrFactory,
   getDOM,
   setRootDomAdapter
-} from "./chunk-5LJ4GETK.js";
+} from "./chunk-LXPRFGIR.js";
 import {
   ALLOW_MULTIPLE_PLATFORMS,
   ANIMATION_MODULE_TYPE,

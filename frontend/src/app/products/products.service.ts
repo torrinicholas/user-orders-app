@@ -8,7 +8,7 @@ export interface Product {
   price: Number
 }
 
-const API_URL: string = 'https://localhost/';
+const API_URL: string = 'https://localhost';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +18,12 @@ export class ProductsService {
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(API_URL + 'get/all/product')
+    return this.http.get<Product[]>(API_URL + '/get/all/product')
   }
 
-  getString() {
-    return "ciao bello";
+  addProduct(form_values: Array<string>) {
+    console.log(form_values);
+    return this.http.post<Product[]>(API_URL + '/add/product', form_values);
   }
-  // Add more methods as needed
+
 }
