@@ -1,0 +1,31 @@
+<h1>Orders</h1>
+<table class="table table-light table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Date</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (order of orders; track order.id;) {
+      <tr>
+        <th scope="row">{{ order.id }}</th>
+        <td>{{ order.name }}</td>
+        <td>{{ order.description }}</td>
+        <td>{{ order.date }}</td>
+        <td><button type="button" class="btn btn-danger" (click)="deleteOrder(order.id)">Delete</button></td>
+        <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addOrderModal" (click)="editOrder(order)" >Edit</button></td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" (click)="editOrder(orders)" data-bs-target="#addOrderModal">
+  Add Order
+</button>
+
+<app-order-form [order]="selectedOrder"></app-order-form>

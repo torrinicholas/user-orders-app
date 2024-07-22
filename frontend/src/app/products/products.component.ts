@@ -32,7 +32,6 @@ export class ProductsComponent implements OnInit {
     );
   }
 
-
   deleteProduct(id: string) {
     this.productsService.deleteProduct(id).subscribe(
       response => {
@@ -47,8 +46,6 @@ export class ProductsComponent implements OnInit {
   editProduct(product: Product): void {
     this.selectedProduct = product;
   }
-
-
 
 
 }

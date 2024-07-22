@@ -101,4 +101,21 @@ class Order
 
     return $this;
   }
+
+  public function toJson(): string
+  {
+    $productMap = $this->toArray();
+    return json_encode($productMap);
+  }
+
+  public function toArray()
+  {
+    $productMap = [
+      'id'    => $this->getId() ?? '',
+      'name' => $this->getName() ?? '',
+      'description' => $this->getDescription() ?? '',
+      'date' => $this->getDate()?->format('Y-m-d') ?? ''
+    ];
+    return $productMap;
+  }
 }
