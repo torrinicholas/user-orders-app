@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Order;
+use App\Entity\Products;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\Proxy;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -93,6 +95,96 @@ class OrdersController extends AbstractController
     }
     $entityManager->remove($order);
     $entityManager->flush();
+    return new Response(TRUE);
+  }
+
+  #[Route('/get/products/by/order/{id}', name: 'get_products_by_order', methods: 'GET')]
+  public function getProductsByOrder(EntityManagerInterface $entityManager, int $id): Response
+  {
+    $order = $entityManager->getRepository(Order::class)->find($id);
+
+    if (!$order) {
+      throw $this->createNotFoundException(
+        'No order found for id ' . $id
+      );
+    }
+
+    $products = $order->getProducts();
+
+    $productsResponce = [];
+
+    foreach ($products as $product) {
+      $productsResponce[] = $product->toArray();
+    }
+
+    $productsResponce = json_encode($productsResponce);
+
+    return new Response($productsResponce);
+  }
+
+  #[Route('/add/product/to/order/{id}', name: 'add_product_to_order', methods: 'PUT')]
+  public function addProductToOrder(EntityManagerInterface $entityManager,  Request $request, int $id): Response
+  {
+    $order = $entityManager->getRepository(Order::class)->find($id);
+
+    if (!$order) {
+      throw $this->createNotFoundException(
+        'No order found for id ' . $id
+      );
+    }
+
+    $body = $request->getContent();
+    if (!$body) {
+      return new Response(FALSE);
+    }
+    $body = json_decode($body, TRUE);
+    $idProduct = $body['id_product'];
+
+    $product = $entityManager->getRepository(Products::class)->find($idProduct);
+
+    if (!$product) {
+      throw $this->createNotFoundException(
+        'No product found for id ' . $idProduct
+      );
+    }
+
+    $order->addProduct($product);
+    $entityManager->persist($order);
+    $entityManager->flush();
+
+    return new Response(TRUE);
+  }
+
+  #[Route('/delete/product/to/order/{id}', name: 'delete_product_to_order', methods: 'POST')]
+  public function deleteProductToOrder(EntityManagerInterface $entityManager,  Request $request, int $id): Response
+  {
+    $order = $entityManager->getRepository(Order::class)->find($id);
+
+    if (!$order) {
+      throw $this->createNotFoundException(
+        'No order found for id ' . $id
+      );
+    }
+
+    $body = $request->getContent();
+    if (!$body) {
+      return new Response(FALSE);
+    }
+    $body = json_decode($body, TRUE);
+    $idProduct = $body['id_product'];
+
+    $product = $entityManager->getRepository(Products::class)->find($idProduct);
+
+    if (!$product) {
+      throw $this->createNotFoundException(
+        'No product found for id ' . $idProduct
+      );
+    }
+
+    $order->removeProduct($product);
+    $entityManager->persist($order);
+    $entityManager->flush();
+
     return new Response(TRUE);
   }
 }

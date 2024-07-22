@@ -30,4 +30,16 @@ export class OrdersService {
     return this.http.delete<Order[]>(API_URL + '/delete/order/' + id);
   }
 
+  getProducts(id: string) {
+    return this.http.get(API_URL + '/get/products/by/order/' + id);
+  }
+
+  addProduct(id: string, id_product: Array<string>) {
+    return this.http.put(API_URL + '/add/product/to/order/' + id, id_product);
+  }
+
+  deleteProduct(id: string, id_product: string) {
+    return this.http.post(API_URL + '/delete/product/to/order/' + id, { 'id_product': id_product });
+  }
+
 }

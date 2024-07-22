@@ -1,0 +1,23 @@
+<div class="modal fade" id="addProductOrderModal" tabindex="-1" aria-labelledby="addProductModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="addProductModalLabel">Add Product for order: {{ orderId }}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm.value)">
+          <div class="mb-3">
+            <select class="form-select" id="id_product" name="id_product" ngModel>                            
+              @for (product of products; track product.id;) {
+              <option value="{{ product.id }}">{{ product.name }}</option>
+              }
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

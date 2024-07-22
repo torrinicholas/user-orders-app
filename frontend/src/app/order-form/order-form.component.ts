@@ -17,10 +17,10 @@ export class OrderFormComponent implements OnChanges {
   //Load order for edit
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['order'] && changes['order'].currentValue) {
-      this.loadorder(changes['order'].currentValue);
+      this.loadOrder(changes['order'].currentValue);
     }
   }
-  loadorder(order: Order): void { }
+  loadOrder(order: Order): void { }
 
   constructor(private ordersService: OrdersService) { }
   //Save order
