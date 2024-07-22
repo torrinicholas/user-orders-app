@@ -11,14 +11,25 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProductsController extends AbstractController
 {
-  #[Route('/add/product', name: 'add_product', methods: 'POST')]
+  #[Route('/add_update/product', name: 'add_update_product', methods: 'PUT')]
   public function create(EntityManagerInterface $entityManager, Request $request): Response
   {
+    $body = $request->getContent();
+    if (!$body) {
+      return new Response(FALSE);
+    }
+    $body = json_decode($body, TRUE);
+    $name = $body['name'];
+    $price = $body['price'];
 
-    $name = $request->query->get('name');
-    $price = $request->query->get('price');
 
-    $product = new Products();
+    $id = array_key_exists('product_id', $body) ? $body['product_id'] : NULL;
+
+    if ($id) {
+      $product = $entityManager->getRepository(Products::class)->find($id);
+    } else {
+      $product = new Products();
+    }
     $product->setName($name);
     $product->setPrice($price);
 
@@ -45,16 +56,7 @@ class ProductsController extends AbstractController
       );
     }
 
-    $content = $product->toJson();
-    $status = 200;
-    $headers = [
-        'Content-Type' => 'text/plain',
-        'Access-Control-Allow-Origin' => '*', // Permette richieste da qualsiasi origine
-        'Access-Control-Allow-Methods' => 'GET, POST, PUT, DELETE, OPTIONS', // Metodi HTTP permessi
-        'Access-Control-Allow-Headers' => 'Content-Type, Authorization', // Intestazioni HTTP permessi
-    ];
-
-    return new Response($content, $status, $headers );
+    return new Response($product->toJson());
   }
 
   #[Route('/get/all/product', name: 'show_all_product', methods: 'GET')]
@@ -74,15 +76,21 @@ class ProductsController extends AbstractController
 
     $content = json_encode($content);
 
-    $status = 200;
-    $headers = [
-        'Content-Type' => 'text/plain',
-        'Access-Control-Allow-Origin' => '*', // Permette richieste da qualsiasi origine
-        'Access-Control-Allow-Methods' => 'GET, POST, PUT, DELETE, OPTIONS', // Metodi HTTP permessi
-        'Access-Control-Allow-Headers' => 'Content-Type, Authorization', // Intestazioni HTTP permessi
-    ];
-
-    return new Response($content, $status, $headers);
+    return new Response($content);
   }
 
+  #[Route('/delete/product/{id}', name: 'delete_product', methods: 'DELETE')]
+  public function delete(EntityManagerInterface $entityManager, int $id): Response
+  {
+    $product = $entityManager->getRepository(Products::class)->find($id);
+
+    if (!$product) {
+      throw $this->createNotFoundException(
+        'No product found for id ' . $id
+      );
+    }
+    $entityManager->remove($product);
+    $entityManager->flush();
+    return new Response(TRUE);
+  }
 }

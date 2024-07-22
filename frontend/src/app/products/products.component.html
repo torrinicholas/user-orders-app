@@ -5,6 +5,8 @@
       <th scope="col">ID</th>
       <th scope="col">Name</th>
       <th scope="col">Price</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -13,9 +15,15 @@
         <th scope="row">{{ product.id }}</th>
         <td>{{ product.name }}</td>
         <td>{{ product.price }}</td>
+        <td><button type="button" class="btn btn-danger" (click)="deleteProduct(product.id)">Delete</button></td>
+        <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addProductModal" (click)="editProduct(product)" >Edit</button></td>
       </tr>
     }
   </tbody>
 </table>
 
-<app-product-form></app-product-form>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" (click)="editProduct(products)" data-bs-target="#addProductModal">
+  Add product
+</button>
+
+<app-product-form [product]="selectedProduct"></app-product-form>

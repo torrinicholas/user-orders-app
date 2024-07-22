@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Product {
-  id: Number,
+  id: Number | null,
   name: String,
   price: Number
 }
@@ -22,8 +22,11 @@ export class ProductsService {
   }
 
   addProduct(form_values: Array<string>) {
-    console.log(form_values);
-    return this.http.post<Product[]>(API_URL + '/add/product', form_values);
+    return this.http.put<Product[]>(API_URL + '/add_update/product', form_values);
+  }
+
+  deleteProduct(id: string) {
+    return this.http.delete<Product[]>(API_URL + '/delete/product/' + id);
   }
 
 }

@@ -16,21 +16,38 @@ import { ProductFormComponent } from '../product-form/product-form.component';
 export class ProductsComponent implements OnInit {
 
   products:any = [];
-
+  selectedProduct: Product  = { id: null, name: '', price: 0 };
+  
   constructor(private productsService: ProductsService) { }
 
-
+  //Show products list
   ngOnInit() {
     this.productsService.getProducts().subscribe(
       response => {
         this.products = response;        
-        console.log(this.products);
       },
       error => {
-        console.error('Error fetching products:', error);
+        console.error('Error get products: ', error);
       }
     );
   }
+
+
+  deleteProduct(id: string) {
+    this.productsService.deleteProduct(id).subscribe(
+      response => {
+        location.reload();        
+      },
+      error => {
+        console.error('Error delete products: ', error);
+      }
+    );
+  }
+
+  editProduct(product: Product): void {
+    this.selectedProduct = product;
+  }
+
 
 
 
