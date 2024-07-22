@@ -18,7 +18,7 @@
         <td>{{ order.name }}</td>
         <td>{{ order.description }}</td>
         <td>{{ order.date }}</td>
-        <td><a class="btn btn-success" href="/view/products/{{ order.id }}" target="_blank">Manage products</a></td>
+        <td><a class="btn btn-success" href="/view/products/{{ order.id }}">Manage products</a></td>
         <td><button type="button" class="btn btn-danger" (click)="deleteOrder(order.id)">Delete</button></td>
         <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addOrderModal" (click)="editOrder(order)" >Edit</button></td>
       </tr>

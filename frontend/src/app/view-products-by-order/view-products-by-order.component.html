@@ -1,21 +1,21 @@
 <h1>Products of order: {{ orderId }}</h1>
-<table class="table table-primary table-hover">
+<table id="ProductsOrder" class="table table-primary table-hover">
   <thead>
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Name</th>
-      <th scope="col">Price</th>      
+      <th scope="col">Price</th>
       <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     @for (product of products; track product.id;) {
-      <tr>
-        <th scope="row">{{ product.id }}</th>
-        <td>{{ product.name }}</td>
-        <td>{{ product.price }}</td>
-        <td><button type="button" class="btn btn-danger" (click)="deleteProduct(product.id)" >Delete</button></td>        
-      </tr>
+    <tr>
+      <th scope="row">{{ product.id }}</th>
+      <td>{{ product.name }}</td>
+      <td>{{ product.price }}</td>
+      <td><button type="button" class="btn btn-danger" (click)="deleteProduct(product.id)">Delete</button></td>
+    </tr>
     }
   </tbody>
 </table>
