@@ -1,4 +1,6 @@
-The project was built using Docker and Symfony 7. Angular 18 and Bootstrap 5 were used for the frontend part.
+## Project Overview
+Backend: Symfony 7, Docker.
+Frontend: Angular 18, Bootstrap 5.
 
 ### Prerequisites
 Ensure Docker and Docker Compose are installed.
