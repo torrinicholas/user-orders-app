@@ -15,6 +15,6 @@ Ensure Docker and Docker Compose are installed.
 
 ### Access the Web App
 Once the containers are running, open your web browser and go to:
-https://localhost/
+**https://localhost/**
 
-When the screen with the message "" appears, click on "here" to access the web app.
+When the screen with the message "This is the entry point of API, click here to access the front end." appears, click on "here" to access the web app.
