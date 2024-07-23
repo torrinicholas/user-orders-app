@@ -23,7 +23,7 @@ When the screen with the message "This is the entry point of API, click here to 
 ### Order
 
 - **[PUT]** `/add_update/order` - `{ "name": (string), "description": (string), "date": (string), "order_id": (int, optional) }`
-- **[GET]** `/get/order/{id}
+- **[GET]** `/get/order/{id}`
 - **[GET]** `/get/all/orders` 
 - **[DELETE]** `/delete/order/{id}` 
 - **[GET]** `/get/products/by/order/{id}` 
