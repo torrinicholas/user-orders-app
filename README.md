@@ -18,3 +18,24 @@ Once the containers are running, open your web browser and go to:
 **https://localhost/**
 
 When the screen with the message "This is the entry point of API, click here to access the front end." appears, click on "here" to access the web app.
+
+## EndPoint
+### Order
+Ecco l'elenco degli endpoint per `OrdersController` nel formato richiesto:
+
+- **[PUT]** `/add_update/order` - `{ "name": (string), "description": (string), "date": (string), "order_id": (int, opzionale) }`
+- **[GET]** `/get/order/{id}
+- **[GET]** `/get/all/orders` 
+- **[DELETE]** `/delete/order/{id}` 
+- **[GET]** `/get/products/by/order/{id}` 
+- **[PUT]** `/add/product/to/order/{id}` - `{ "id_product": (int) }`
+- **[POST]** `/delete/product/to/order/{id}` - `{ "id_product": (int) }`
+
+### Producut
+Ecco l'elenco degli endpoint con i parametri per le chiamate POST e PUT nel formato richiesto:
+
+- **[PUT]** `/add_update/product` - `{ "name": (string), "price": (float), "product_id": (int, opzionale) }`
+- **[GET]** `/get/product/{id}`
+- **[GET]** `/get/all/product` 
+- **[DELETE]** `/delete/product/{id}`
+---
