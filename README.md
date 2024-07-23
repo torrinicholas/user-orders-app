@@ -1,5 +1,5 @@
 ### Project Overview
-The project uses Docker and Symfony 7, MySQL for the backend, while Angular 18 and Bootstrap 5 are used for the frontend.
+The project uses Docker Symfony 7 and MySQL for the backend, while Angular 18 and Bootstrap 5 are used for the frontend.
 
 ### Prerequisites
 Ensure Docker and Docker Compose are installed.
@@ -22,7 +22,7 @@ When the screen with the message "This is the entry point of API, click here to 
 ## EndPoint
 ### Order
 
-- **[PUT]** `/add_update/order` - `{ "name": (string), "description": (string), "date": (string), "order_id": (int, opzionale) }`
+- **[PUT]** `/add_update/order` - `{ "name": (string), "description": (string), "date": (string), "order_id": (int, optional) }`
 - **[GET]** `/get/order/{id}
 - **[GET]** `/get/all/orders` 
 - **[DELETE]** `/delete/order/{id}` 
