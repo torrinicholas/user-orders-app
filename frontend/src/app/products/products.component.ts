@@ -16,6 +16,7 @@ import { ProductFormComponent } from '../product-form/product-form.component';
 export class ProductsComponent implements OnInit {
 
   products:any = [];
+  filteredProducts: any[] = [];
   selectedProduct: Product  = { id: null, name: '', price: 0 };
   
   constructor(private productsService: ProductsService) { }
@@ -24,7 +25,8 @@ export class ProductsComponent implements OnInit {
   ngOnInit() {
     this.productsService.getProducts().subscribe(
       response => {
-        this.products = response;        
+        this.products = response;  
+        this.filteredProducts = this.products;
       },
       error => {
         console.error('Error get products: ', error);
@@ -48,4 +50,13 @@ export class ProductsComponent implements OnInit {
   }
 
 
+  filterTable(event: Event) {
+    const el = event.target as HTMLInputElement;
+    var filterValue = el.value;
+    this.filteredProducts = this.products.filter((item: any) =>
+      item.id.toString().toLowerCase().includes(filterValue.toLowerCase()) ||
+      item.name.toString().toLowerCase().includes(filterValue.toLowerCase()) ||
+      item.price.toLowerCase().includes(filterValue.toLowerCase())
+    );
+  }
 }

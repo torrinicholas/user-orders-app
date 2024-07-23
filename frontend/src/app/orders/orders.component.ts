@@ -12,6 +12,7 @@ import { OrderFormComponent } from '../order-form/order-form.component';
 })
 export class OrdersComponent {
   orders: any = [];
+  filteredOrders: any[] = [];
   selectedOrder: Order = { id: null, name: '', description: '', date: new Date() };
 
   constructor(private ordersService: OrdersService) { }
@@ -21,6 +22,7 @@ export class OrdersComponent {
     this.ordersService.getOrders().subscribe(
       response => {
         this.orders = response;
+        this.filteredOrders = response;
       },
       error => {
         console.error('Error get orders: ', error);
@@ -41,6 +43,17 @@ export class OrdersComponent {
 
   editOrder(order: Order): void {
     this.selectedOrder = order;
+  }
+
+  filterTable(event: Event) {
+    const el = event.target as HTMLInputElement;
+    var filterValue = el.value;
+    this.filteredOrders = this.orders.filter((item: any) =>
+      item.id.toString().toLowerCase().includes(filterValue.toLowerCase()) ||
+      item.name.toString().toLowerCase().includes(filterValue.toLowerCase()) ||
+      item.description.toLowerCase().includes(filterValue.toLowerCase()) ||
+      item.date.toLowerCase().includes(filterValue.toLowerCase())
+    );
   }
 
 
