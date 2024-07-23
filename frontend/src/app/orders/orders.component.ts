@@ -14,7 +14,9 @@ export class OrdersComponent {
   orders: any = [];
   filteredOrders: any[] = [];
   selectedOrder: Order = { id: null, name: '', description: '', date: new Date() };
-
+  sortColumn: string = '';
+  sortOrder: 'asc' | 'desc' = 'asc';
+  
   constructor(private ordersService: OrdersService) { }
 
   //Show orders list
@@ -56,5 +58,24 @@ export class OrdersComponent {
     );
   }
 
+  sortTable(column: string) {
+    if (this.sortColumn === column) {
+      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortColumn = column;
+      this.sortOrder = 'asc';
+    }
+
+    this.filteredOrders.sort((a, b) => {
+      let comparison = 0;
+      if (a[column] > b[column]) {
+        comparison = 1;
+      } else if (a[column] < b[column]) {
+        comparison = -1;
+      }
+
+      return this.sortOrder === 'asc' ? comparison : -comparison;
+    });
+  }
 
 }

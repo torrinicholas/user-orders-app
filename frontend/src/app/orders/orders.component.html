@@ -7,10 +7,10 @@
 <table class="table table-light table-hover">
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
+      <th scope="col" class="link-primary" (click)="sortTable('id')"><a class="link-primary cursor-pointer"> ID <i class="bi bi-arrow-down-up"></i></a></th>
+      <th scope="col" (click)="sortTable('name')"><a class="link-primary cursor-pointer"> Name <i class="bi bi-arrow-down-up"></i></a></th>
       <th class="col">Description</th>
-      <th scope="col">Date</th>
+      <th scope="col" (click)="sortTable('date')"><a class="link-primary cursor-pointer"> Date <i class="bi bi-arrow-down-up"></i></a></th>
       <th scope="col"></th>
       <th scope="col"></th>
       <th scope="col"></th>
