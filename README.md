@@ -21,7 +21,6 @@ When the screen with the message "This is the entry point of API, click here to 
 
 ## EndPoint
 ### Order
-Ecco l'elenco degli endpoint per `OrdersController` nel formato richiesto:
 
 - **[PUT]** `/add_update/order` - `{ "name": (string), "description": (string), "date": (string), "order_id": (int, opzionale) }`
 - **[GET]** `/get/order/{id}
@@ -32,7 +31,6 @@ Ecco l'elenco degli endpoint per `OrdersController` nel formato richiesto:
 - **[POST]** `/delete/product/to/order/{id}` - `{ "id_product": (int) }`
 
 ### Producut
-Ecco l'elenco degli endpoint con i parametri per le chiamate POST e PUT nel formato richiesto:
 
 - **[PUT]** `/add_update/product` - `{ "name": (string), "price": (float), "product_id": (int, opzionale) }`
 - **[GET]** `/get/product/{id}`
