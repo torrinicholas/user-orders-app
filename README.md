@@ -30,7 +30,7 @@ When the screen with the message "This is the entry point of API, click here to 
 - **[PUT]** `/add/product/to/order/{id}` - `{ "id_product": (int) }`
 - **[POST]** `/delete/product/to/order/{id}` - `{ "id_product": (int) }`
 
-### Producut
+### Product
 
 - **[PUT]** `/add_update/product` - `{ "name": (string), "price": (float), "product_id": (int, opzionale) }`
 - **[GET]** `/get/product/{id}`
