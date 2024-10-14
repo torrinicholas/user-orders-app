@@ -1,3 +1,5 @@
+Simile app to manage daily user orders
+
 ### Project Overview
 The project uses Docker Symfony 7 and MySQL for the backend, while Angular 18 and Bootstrap 5 are used for the frontend.
 
